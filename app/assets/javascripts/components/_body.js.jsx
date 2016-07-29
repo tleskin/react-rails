@@ -29,14 +29,14 @@ let Body = React.createClass({
     let newState = this.state.skills.concat(skill);
     this.setState({ skills: newState })
   },
-  
+
   handleUpdate(skill) {
     $.ajax({
       url: `/api/v1/skills/${skill.id}`,
       type: 'PUT',
       data: { skill: skill },
-      success: () => {
-        this.updateSkills(skill);
+      success: (skill) => {
+        this.updateSkills(skill)
       }
     });
   },
