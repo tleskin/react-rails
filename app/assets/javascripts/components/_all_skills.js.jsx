@@ -1,25 +1,20 @@
-let AllSkills = React.createClass({
-  getInitialState(){
-    return {
-      skills: []
-    }
-  },
-
-  componentDidMount(){
-     $.getJSON('/api/v1/skills.json', (response) => { this.setState({ skills: response }) });
+var AllSkills = React.createClass({
+  handleDelete(id){
+    this.props.handleDelete(id);
   },
   
-  render(){
-    let skills = this.state.skills.map((skill)=>{
+  render() {
+    var skills = this.props.skills.map((skill) => {
       return (
         <div key={skill.id}>
           <h3>{skill.name}</h3>
-          <p><strong>Level:</strong>{skill.level}</p>
+          <p><strong>Level:</strong> {skill.level}</p>
           <p>{skill.details}</p>
+          <button onClick={this.handleDelete.bind(this, skill.id)}>Delete</button>
         </div>
       )
-    })
-    
+    });
+
     return (
       <div>
         {skills}
